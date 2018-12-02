@@ -19,6 +19,7 @@
     <meta content="Bedtime Stories - Exciting Tales for Young &amp; Old – Bedtime Stories" itemprop="name">
     <meta content="The Bedtime Story App for Families! Awaken the inner storyteller with diverse and empowering stories for young &amp; old. Storytelling has never been easier." itemprop="description">
     <meta content="https://getbedtimestories.com/assets/images/share/share-36ccaab1.png" itemprop="image">
+
     <meta content="company" property="og:type">
     <meta content="https://getbedtimestories.com/" property="og:url">
     <meta content="Bedtime Stories" property="og:site_name">
@@ -26,17 +27,13 @@
     <meta content="The Bedtime Story App for Families! Awaken the inner storyteller with diverse and empowering stories for young &amp; old. Storytelling has never been easier." property="og:description">
     <meta content="https://getbedtimestories.com/assets/images/share/share-36ccaab1.png" property="og:image">
     <meta property="og:locale">
+    
     <meta content="1180441035357755" property="fb:app_id">
     <meta content="1180441035357755" property="fb:pages">
-    <meta content="summary_large_image" name="twitter:card">
-    <meta content="https://getbedtimestories.com/" name="twitter:url">
-    <meta content="Bedtime Stories - Exciting Tales for Young &amp; Old – Bedtime Stories" name="twitter:title">
-    <meta content="The Bedtime Story App for Families! Awaken the inner storyteller with diverse and empowering stories for young &amp; old. Storytelling has never been easier." name="twitter:description">
-    <meta content="https://getbedtimestories.com/assets/images/share/share-36ccaab1.png" name="twitter:image">
-    <meta content="@getbedtimestory" name="twitter:site">
-    <meta content="app-id=1231933548" name="apple-itunes-app">
-    <link href="https://www.google-analytics.com/" rel="dns-prefetch">
-    <link href="Bedtime_files/application-3baa45c6.css" rel="stylesheet">
+    
+    <link href="../../css/main.css" rel="stylesheet">
+    <script type="text/javascript" src="../../js/modal.js"></script>
+
     <style type="text/css">
         iframe#_hjRemoteVarsFrame {
             display: none !important;
@@ -62,9 +59,9 @@
                 <div class="container">
                     <div class="navbar-brand">
                         <div class="navbar-item">
-                            <a class="brand" href="#">
+                            <a class="brand" href="../../index.html">
                                 <div>
-                                    <img alt="лого аксессуары" role="presentation" src="Bedtime_files/ShoppingClub.png">
+                                    <img alt="лого аксессуары" role="presentation" src="../../img/ShoppingClub.png">
                                 </div>
                             </a>
                         </div>
@@ -103,13 +100,13 @@
                                 <h1 class="title is-spaced">Текстовый контент для продукта</h1>
                                 <h2 class="subtitle is-4">Характеристики</h2>
                                 <div class="field is-grouped"> 
-                                    <div class="control"> <a class="button is-primary is-medium" href="#target">Заказать!</a> </div>
+                                    <div class="control"> <a class="button is-primary is-medium modal-button" data-target="product-form-modal">Заказать!</a> </div>
                                 </div>
                             </div>
                         </div>
                         <div class="column is-7">
                             <div class="section-media">
-                                <img src="Bedtime_files/Hero-Karlotta1x-8bd462e8.jpg"></img>
+                                <img src="product-6.jpg"></img>
                             </div>
                         </div>
                     </div>
@@ -161,7 +158,7 @@
                                         </div>
                                         <hr class="spacer is-2">
                                         <div class="buttons has-addons is-centered">
-                                          <a class="button is-primary is-medium" href="#target">Заказать!</a>
+                                          <a class="button is-primary is-medium modal-button" data-target="product-form-modal">Заказать!</a>
                                         </div>
                                          <hr class="spacer is-2">
                                     </div>
@@ -350,56 +347,39 @@
                 </div>
             </div>
         </footer>
-        <div class="modal" id="videoSchool">
-            <div class="modal-background">
-            </div>
-            <button aria-label="close" class="modal-close is-large">
-            </button>
-            <div class="modal-content">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe allow="autoplay; encrypted-media" allowfullscreen="" data-src="https://www.youtube.com/embed/K8i-w8Rq-Ck" src="" frameborder="0">
-                    </iframe>
+
+        <div class="modal" id="product-form-modal">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Форма заказа</p>
+              <button class="delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+              <form>
+                <div class="field">
+                  <label class="label">Name</label>
+                  <div class="control">
+                    <input class="input" type="text" placeholder="e.g Alex Smith">
+                  </div>
                 </div>
-            </div>
+
+                <div class="field">
+                  <label class="label">Email</label>
+                  <div class="control">
+                    <input class="input" type="email" placeholder="e.g. alexsmith@gmail.com">
+                  </div>
+                </div>                  
+              </form>
+            </section>
+            <footer class="modal-card-foot">
+              <button class="button is-success">Заказать</button>
+              <button class="button">Закрыть</button>
+            </footer>
+          </div>
         </div>
     </div>
-    <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-M5XHPR8');
-    </script>
-    <noscript>
-        <iframe height=0 src="https://www.googletagmanager.com/ns.html?id=GTM-M5XHPR8" style="display:none;visibility:hidden" width=0>
-        </iframe>
-    </noscript>
-    <script type="text/javascript" id="">
-        ! function(b, e, f, g, a, c, d) {
-            b.fbq || (a = b.fbq = function() {
-                a.callMethod ? a.callMethod.apply(a, arguments) : a.queue.push(arguments)
-            }, b._fbq || (b._fbq = a), a.push = a, a.loaded = !0, a.version = "2.0", a.queue = [], c = e.createElement(f), c.async = !0, c.src = g, d = e.getElementsByTagName(f)[0], d.parentNode.insertBefore(c, d))
-        }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
-        fbq("init", "723714854502216");
-        fbq("track", "PageView");
-    </script>
 
-    <noscript>
-        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=723714854502216&amp;ev=PageView&amp;noscript=1">
-    </noscript>
-    <iframe style="display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;" name="_hjRemoteVarsFrame" title="_hjRemoteVarsFrame" id="_hjRemoteVarsFrame" src="Bedtime_files/rcj-da10bd4908deb9e19dfde013ec3fe4ff.html">
-    </iframe>
-    <div id="ads">
-    </div>
 </body>
 
 </html>
