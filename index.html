@@ -658,7 +658,8 @@
     <script>
         function sendEmail() {
             var new_email = document.getElementById("send-email").value;
-            emails = db.ref('emails/');
+            var database = firebase.database();
+            emails = database.ref('emails/');
             emails.push().set({email: new_email});
         }
     </script>
