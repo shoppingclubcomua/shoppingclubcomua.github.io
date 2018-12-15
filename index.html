@@ -472,10 +472,10 @@
                                             <input class="is-hidden" name="b_53631bf5dc7e894054ae15edf_0a862d88fd" tabindex="-1">
                                             <div class="field has-addons">
                                                 <div class="control is-expanded">
-                                                    <input class="input is-medium" name="EMAIL" placeholder="Enter your email" required="" type="email">
+                                                    <input class="input is-medium" name="EMAIL" placeholder="Enter your email" required="" type="email" id="send-email">
                                                 </div>
                                                 <div class="control">
-                                                    <button class="button is-primary is-inverted is-medium" type="submit">Подписаться!
+                                                    <button onclick="sendEmail()" class="button is-primary is-inverted is-medium" type="submit">Подписаться!
                                                     </button>
                                                 </div>
                                             </div>
@@ -641,6 +641,29 @@
             </div>
         </div>
     </div>
+
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyCXDaL_fBQ7uRPa_7zkME-miQm2Uo0HoB8",
+        authDomain: "shoppingclubcomua-firebase.firebaseapp.com",
+        databaseURL: "https://shoppingclubcomua-firebase.firebaseio.com",
+        projectId: "shoppingclubcomua-firebase",
+        storageBucket: "shoppingclubcomua-firebase.appspot.com",
+        messagingSenderId: "209475115553"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+    <script>
+        function sendEmail() {
+            var new_email = document.getElementById("send-email").value;
+            emails = db.ref('emails/');
+            emails.push().set({email: new_email});
+        }
+    </script>
+
     <script>
         (function(w, d, s, l, i) {
             w[l] = w[l] || [];
