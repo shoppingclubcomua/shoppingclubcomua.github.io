@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <title>Shopping Club &amp; интернет-магазин сумок, рюкзаков и аксессуаров
     </title>
+    <link rel="manifest" href="/manifest.json">
+
     <meta content="bedtime, bedtime stories, storytelling, kids, children, education, goodnight story" name="keywords">
     <meta name="author">
     <meta name="publisher">
@@ -653,6 +655,23 @@
         messagingSenderId: "209475115553"
       };
       firebase.initializeApp(config);
+    </script>
+
+    <script>
+    const messaging = firebase.messaging();
+    messaging.usePublicVapidKey("BIWiiYlS46z93E4gm9p80G32i98EwezKb-xzQBv2WgK4C2uj_xgyPA23T-8pw_Ar4L42d-Swegkgwb5A89w9KYs");
+
+    async function FCMnotificationPermission() {
+        try {
+            const messaging = firebase.messaging();
+            await messaging.requestPermission();
+            const token = await messaging.getToken();
+            console.log('token do:', token);  
+            return token;
+          } catch (error) {
+            console.error(error);
+          }
+      }
     </script>
 
     <script>
