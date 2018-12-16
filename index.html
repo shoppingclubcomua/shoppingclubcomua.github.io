@@ -669,6 +669,12 @@
             console.error(error);
           }
       }
+
+    messaging.onMessage(function(payload) {
+        console.log('Message received. ', payload);
+        alert(payload);
+    });
+
     </script>
 
     <script>
