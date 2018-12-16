@@ -643,10 +643,7 @@
         </div>
     </div>
 
-    <!-- firebase -->
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
-    <!-- <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-messaging.js"></script> -->
-
     <script>
       var config = {
         apiKey: "AIzaSyCXDaL_fBQ7uRPa_7zkME-miQm2Uo0HoB8",
@@ -660,12 +657,10 @@
     </script>
 
     <script>
-    const messaging = firebase.messaging();
-    messaging.usePublicVapidKey("BIWiiYlS46z93E4gm9p80G32i98EwezKb-xzQBv2WgK4C2uj_xgyPA23T-8pw_Ar4L42d-Swegkgwb5A89w9KYs");
-
     async function FCMnotificationPermission() {
         try {
             const messaging = firebase.messaging();
+            messaging.usePublicVapidKey("BIWiiYlS46z93E4gm9p80G32i98EwezKb-xzQBv2WgK4C2uj_xgyPA23T-8pw_Ar4L42d-Swegkgwb5A89w9KYs");
             await messaging.requestPermission();
             const token = await messaging.getToken();
             console.log('token do:', token);  
