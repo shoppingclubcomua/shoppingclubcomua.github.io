@@ -468,13 +468,13 @@
                                         </div>
                                     </div>
                                     <div class="column is-half">
-                                        <form>
+                                        <form onsubmit="sendEmail();">
                                             <div class="field has-addons">
                                                 <div class="control is-expanded">
-                                                    <input class="input is-medium" name="EMAIL" placeholder="Enter your email" required="" type="email" id="send-email">
+                                                    <input class="input is-medium" placeholder="Enter your email" required="" type="email" id="send-email">
                                                 </div>
                                                 <div class="control">
-                                                    <button onclick="sendEmail()" class="button is-primary is-inverted is-medium">Подписаться!
+                                                    <button type="submit" class="button is-primary is-inverted is-medium">Подписаться!
                                                     </button>
                                                 </div>
                                             </div>
@@ -661,6 +661,7 @@
             var database = firebase.database();
             emails = database.ref('emails/');
             emails.push().set({email: new_email});
+            return false;
         }
     </script>
 
