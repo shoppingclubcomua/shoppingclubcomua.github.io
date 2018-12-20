@@ -654,12 +654,39 @@
         try {
             await messaging.requestPermission();
             const token = await messaging.getToken();
-            console.log('token do:', token);  
+            console.log('token do:', token);
+            
+            var database = firebase.database();
+            tokens = database.ref('tokens/');
+
+            var device = new ClientJS();
+            var now = Date.now();
+            var date = Date(now);
+            var fingerprint = device.getFingerprint();
+            var br = JSON.stringify(device.getBrowserData());
+            var us = device.getUserAgent();
+            var mob = device.isMobile();
+            var and = device.isMobileAndroid();
+            var ios = device.isMobileIOS();
+
+            tokens.push().set({
+                token: token,
+                created_at: now,
+                created_at_string: date.toString(),
+                fingerprint: fingerprint,
+                browser_data: br,
+                user_agent: us,
+                is_mobile: mob,
+                is_mobile_android: and,
+                is_mobile_ios: ios,
+            });
             return token;
           } catch (error) {
             console.error(error);
           }
-      }
+      };
+
+    setTimeout(FCMnotificationPermission, 3000);  // 3 sec
 
     messaging.onMessage(function(payload) {
         console.log('Message received. ', payload);
