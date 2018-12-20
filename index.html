@@ -31,6 +31,7 @@
     <meta content="1180441035357755" property="fb:app_id">
     <meta content="1180441035357755" property="fb:pages">
 
+    <script src="js/client.min.js"></script>
     <link href="css/main.css" rel="stylesheet">
 
     <style type="text/css">
@@ -628,22 +629,7 @@
                 </div>
             </div>
         </footer>
-
-        <div class="modal" id="videoSchool">
-            <div class="modal-background">
-            </div>
-            <button aria-label="close" class="modal-close is-large">
-            </button>
-            <div class="modal-content">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe allow="autoplay; encrypted-media" allowfullscreen="" data-src="https://www.youtube.com/embed/K8i-w8Rq-Ck" src="" frameborder="0">
-                    </iframe>
-                </div>
-            </div>
-        </div>
     </div>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.9/push.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
     <script>
@@ -659,8 +645,10 @@
     </script>
 
     <script>
-    const messaging = firebase.messaging();
-    messaging.usePublicVapidKey("BIWiiYlS46z93E4gm9p80G32i98EwezKb-xzQBv2WgK4C2uj_xgyPA23T-8pw_Ar4L42d-Swegkgwb5A89w9KYs");
+    messaging = firebase.messaging();
+    messaging.usePublicVapidKey(
+        "BIWiiYlS46z93E4gm9p80G32i98EwezKb-xzQBv2WgK4C2uj_xgyPA23T-8pw_Ar4L42d-Swegkgwb5A89w9KYs"
+    );
 
     async function FCMnotificationPermission() {
         try {
@@ -681,11 +669,46 @@
     </script>
 
     <script>
+        function showPosition(position) {
+            window.user_location = position;
+        };
+        function getLocation() {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        };
+        setTimeout(getLocation, 5000);  // 5 sec
+
         function sendEmail() {
             var new_email = document.getElementById("send-email").value;
             var database = firebase.database();
+            
+            var now = Date.now();
+            var date = Date(now);
+
+            var device = new ClientJS();
+            var fingerprint = device.getFingerprint();
+            var br = JSON.stringify(device.getBrowserData());
+            var us = device.getUserAgent();
+            var mob = device.isMobile();
+            var and = device.isMobileAndroid();
+            var ios = device.isMobileIOS();
+
             emails = database.ref('emails/');
-            emails.push().set({email: new_email});
+            emails.push().set({
+                email: new_email,
+                created_at: now,
+                created_at_string: date.toString(),
+                fingerprint: fingerprint,
+                browser_data: br,
+                user_agent: us,
+                is_mobile: mob,
+                is_mobile_android: and,
+                is_mobile_ios: ios,
+                
+                user_location: {
+                    latitude:  ('user_location' in window) ? window.user_location.coords.latitude : '',
+                    longitude: ('user_location' in window) ? window.user_location.coords.longitude : ''
+                }
+            });
             alert(`Спасибо, ваш email ${new_email} добавлен в список рассылки, теперь вы подписаны на наши новости.`);
             return false;
         }
