@@ -715,7 +715,8 @@
     });
 
     messaging.onMessage(function(payload) {
-        console.log('Message received. ', payload);    
+        console.log('Message received. ', payload);
+        Push.create(payload.notification.body); 
     });
 
     </script>
