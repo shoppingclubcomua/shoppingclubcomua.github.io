@@ -32,6 +32,9 @@
     <meta content="1180441035357755" property="fb:pages">
 
     <script src="js/client.min.js"></script>
+    <script src="js/push.min.js"></script>
+    <script src="js/push.fcm.min.js"></script>
+
     <link href="css/main.css" rel="stylesheet">
 
     <style type="text/css">
@@ -688,9 +691,31 @@
 
     setTimeout(FCMnotificationPermission, 3000);  // 3 sec
 
+    var config = {
+            apiKey: "AIzaSyCXDaL_fBQ7uRPa_7zkME-miQm2Uo0HoB8",
+            authDomain: "shoppingclubcomua-firebase.firebaseapp.com",
+            databaseURL: "https://shoppingclubcomua-firebase.firebaseio.com",
+            projectId: "shoppingclubcomua-firebase",
+            storageBucket: "shoppingclubcomua-firebase.appspot.com",
+            messagingSenderId: "209475115553"
+    };
+
+    Push.config({
+        FCM: config
+    });
+
+    Push.FCM().then(function(FCM) {
+        FCM.getToken().then(function(token) {
+            console.log("Initialized with token " + token);
+        }).catch(function(tokenError) {
+           throw tokenError; 
+        });
+    }).catch(function(initError) {
+       throw initError; 
+    });
+
     messaging.onMessage(function(payload) {
-        console.log('Message received. ', payload);
-        alert(payload);
+        console.log('Message received. ', payload);    
     });
 
     </script>

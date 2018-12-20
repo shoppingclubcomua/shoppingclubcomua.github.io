@@ -13,9 +13,11 @@ messaging.setBackgroundMessageHandler(function(payload) {
   var notificationTitle = 'Background Message Title';
   var notificationOptions = {
     body: 'Background Message body.',
-    icon: '/firebase-logo.png'
+    icon: '/img/ShoppingClub.png'
   };
 
   return self.registration.showNotification(notificationTitle,
     notificationOptions);
 });
+
+// https://github.com/firebase/quickstart-js/blob/master/messaging/index.html
