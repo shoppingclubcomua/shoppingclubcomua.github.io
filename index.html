@@ -648,6 +648,7 @@
         messagingSenderId: "209475115553"
       };
       firebase.initializeApp(config);
+      var database = firebase.database();
 
     Push.config({
         FCM: config
@@ -665,8 +666,7 @@
             await messaging.requestPermission();
             const token = await messaging.getToken();
             console.log('token do:', token);
-            
-            var database = firebase.database();
+
             tokens = database.ref('tokens/');
 
             var device = new ClientJS();
@@ -726,8 +726,7 @@
 
         function sendEmail() {
             var new_email = document.getElementById("send-email").value;
-            var database = firebase.database();
-            
+
             var now = Date.now();
             var date = Date(now);
 
