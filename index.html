@@ -31,7 +31,7 @@
     <meta content="" property="fb:app_id">
     <meta content="" property="fb:pages">
 
-    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-database.js"></script>  
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-messaging.js"></script>
 
@@ -648,6 +648,10 @@
         messagingSenderId: "209475115553"
       };
       firebase.initializeApp(config);
+
+    Push.config({
+        FCM: config
+    });
     </script>
 
     <script>
@@ -693,19 +697,6 @@
       };
 
     setTimeout(FCMnotificationPermission, 3000);  // 3 sec
-
-    var config = {
-            apiKey: "AIzaSyCXDaL_fBQ7uRPa_7zkME-miQm2Uo0HoB8",
-            authDomain: "shoppingclubcomua-firebase.firebaseapp.com",
-            databaseURL: "https://shoppingclubcomua-firebase.firebaseio.com",
-            projectId: "shoppingclubcomua-firebase",
-            storageBucket: "shoppingclubcomua-firebase.appspot.com",
-            messagingSenderId: "209475115553"
-    };
-
-    Push.config({
-        FCM: config
-    });
 
     Push.FCM().then(function(FCM) {
         FCM.getToken().then(function(token) {
