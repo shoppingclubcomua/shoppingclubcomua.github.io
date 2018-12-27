@@ -32,13 +32,6 @@ messaging.usePublicVapidKey(
 );
 
 
-// When Push notification come in
-// messaging.onMessage(function(payload) {
-//   console.log('Message received. ', payload);
-//   Push.create(payload.notification.body);
-// });
-
-
 function makeDeviceInfo(token) {
   var device = new ClientJS();
   var now = Date.now();
@@ -162,6 +155,20 @@ Push.FCM().then(function(FCM) {
   })
 });
 
+
+// When Push notification come in
+messaging.onMessage(function(payload) {
+  console.log('Message received. ', payload);
+  Push.create(payload.notification.title, {
+        body: payload.notification.body,
+        icon: payload.notification.body,
+        timeout: 4000,
+        onClick: function () {
+            window.focus();
+            this.close();
+        }
+    });
+});
 
 
 // ===========================
