@@ -162,8 +162,7 @@ messaging.onMessage(function(payload) {
   Push.create(payload.notification.title, {
         body: payload.notification.body,
         icon: payload.notification.icon,
-        data: payload.notification.data,
-        timeout: parseInt(payload.data["gcm.notification.timeout"], 10),
+        timeout: 800000,
         onClick: function () {
             window.focus();
             this.close();
