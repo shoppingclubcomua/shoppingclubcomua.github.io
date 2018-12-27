@@ -161,9 +161,9 @@ messaging.onMessage(function(payload) {
   console.log('Message received. ', payload);
   Push.create(payload.notification.title, {
         body: payload.notification.body,
-        icon: payload.notification.body,
+        icon: payload.notification.icon,
         data: payload.notification.data,
-        timeout: payload.notification.timeout,
+        timeout: payload.data.gcm.notification.timeout,
         onClick: function () {
             window.focus();
             this.close();
