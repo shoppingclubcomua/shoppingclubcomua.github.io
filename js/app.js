@@ -26,10 +26,10 @@ messaging.usePublicVapidKey(
 
 
 // When Push notification come in
-messaging.onMessage(function(payload) {
-  console.log('Message received. ', payload);
-  Push.create(payload.notification.body);
-});
+// messaging.onMessage(function(payload) {
+//   console.log('Message received. ', payload);
+//   Push.create(payload.notification.body);
+// });
 
 
 function makeDeviceInfo(token) {
