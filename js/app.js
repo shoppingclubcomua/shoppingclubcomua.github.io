@@ -10,7 +10,7 @@ var config = {
   messagingSenderId: "209475115553"
 };
 
-// firebase.initializeApp(config);
+firebase.initializeApp(config);
 Push.config({FCM: config});
 
 
