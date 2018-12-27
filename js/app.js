@@ -62,7 +62,7 @@ function makeDeviceInfo(token) {
 };
 
 
-function setTokenSentToServer(isSent) {
+function setTokenSentToServer(sent) {
   window.localStorage.setItem('sentToServer', sent ? '1' : '0');
 };
 
