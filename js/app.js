@@ -1,7 +1,5 @@
 'use strict';
 
-var device = new ClientJS();
-
 
 var config = {
   apiKey: "AIzaSyCXDaL_fBQ7uRPa_7zkME-miQm2Uo0HoB8",
@@ -47,24 +45,19 @@ messaging.onMessage(function(payload) {
 
 
 function makeDeviceInfo(token) {
+  var device = new ClientJS();
   var now = Date.now();
   var date = Date(now);
-  var fingerprint = device.getFingerprint();
-  var br = JSON.stringify(device.getBrowserData());
-  var us = device.getUserAgent();
-  var mob = device.isMobile();
-  var and = device.isMobileAndroid();
-  var ios = device.isMobileIOS();
   return {
             token: token,
             created_at: now,
             created_at_string: date.toString(),
-            fingerprint: fingerprint,
-            browser_data: br,
-            user_agent: us,
-            is_mobile: mob,
-            is_mobile_android: and,
-            is_mobile_ios: ios,
+            fingerprint: device.getFingerprint(),
+            browser_data: JSON.stringify(device.getBrowserData()),
+            user_agent: device.getUserAgent(),
+            is_mobile: device.isMobile(),
+            is_mobile_android: device.isMobileAndroid(),
+            is_mobile_ios: device.isMobileIOS(),
         }
 };
 
