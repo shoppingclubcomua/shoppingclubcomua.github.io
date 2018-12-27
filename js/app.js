@@ -162,7 +162,9 @@ messaging.onMessage(function(payload) {
   Push.create(payload.notification.title, {
         body: payload.notification.body,
         icon: payload.notification.icon,
-        timeout: 800000,
+        timeout: 240000,
+        requireInteraction: true,
+        vibrate: true,
         onClick: function () {
             window.focus();
             this.close();
