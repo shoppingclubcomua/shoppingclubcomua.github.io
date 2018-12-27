@@ -15,6 +15,8 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 var messaging = firebase.messaging();
+var tokens = database.ref('tokens/');
+var emails = database.ref('emails/');
 
 
 messaging.usePublicVapidKey(
@@ -46,8 +48,6 @@ async function FCMnotificationPermission() {
         await messaging.requestPermission();
         const token = await messaging.getToken();
         console.log('token do:', token);
-
-        tokens = database.ref('tokens/');
 
         var device = new ClientJS();
         var now = Date.now();
@@ -101,7 +101,6 @@ function sendEmail() {
     var and = device.isMobileAndroid();
     var ios = device.isMobileIOS();
 
-    emails = database.ref('emails/');
     emails.push().set({
         email: new_email,
         created_at: now,
