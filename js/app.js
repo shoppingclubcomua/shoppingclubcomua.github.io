@@ -175,52 +175,44 @@ messaging.onMessage(function(payload) {
 
 // ===========================
 
+function setUserLocation(sent) {
+  window.localStorage.setItem('setUserLocation', sent ? '1' : '0');
+};
+
+
+function isUserLocationSentToServer() {
+  return window.localStorage.getItem('setUserLocation') === '1';
+};
+
 
 function showPosition(position) {
     window.user_location = position;
+    setUserLocation(true);
 };
 
 
 function getLocation() {
+  if (!isUserLocationSentToServer()) {
     navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    console.log('User window.user_location', window.user_location);
+  }
 };
 
 
 function sendEmail() {
     var new_email = document.getElementById("send-email").value;
-
-    var now = Date.now();
-    var date = Date(now);
-
-    var device = new ClientJS();
-    var fingerprint = device.getFingerprint();
-    var br = JSON.stringify(device.getBrowserData());
-    var us = device.getUserAgent();
-    var mob = device.isMobile();
-    var and = device.isMobileAndroid();
-    var ios = device.isMobileIOS();
-
-    emails.push().set({
-        email: new_email,
-        created_at: now,
-        created_at_string: date.toString(),
-        fingerprint: fingerprint,
-        browser_data: br,
-        user_agent: us,
-        is_mobile: mob,
-        is_mobile_android: and,
-        is_mobile_ios: ios,
-        
-        user_location: {
+    var deviceInfo = makeDeviceInfo(null);
+    deviceInfo['email'] = new_email;
+    deviceInfo['user_location'] = {
             latitude:  ('user_location' in window) ? window.user_location.coords.latitude : '',
             longitude: ('user_location' in window) ? window.user_location.coords.longitude : ''
-        }
-    });
+    };
+
+    emails.push().set(deviceInfo);
     alert(`Спасибо, ваш email ${new_email} добавлен в список рассылки, теперь вы подписаны на наши новости.`);
     return false;
 }
 
 
-// setup
-// setTimeout(FCMnotificationPermission, 3000);  // 3 sec
-setTimeout(getLocation, 5000);                // 5 sec
+setTimeout(getLocation, 10000);  // 10 sec
