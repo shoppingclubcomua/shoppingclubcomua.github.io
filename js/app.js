@@ -140,20 +140,20 @@ Push.FCM().then(function(FCM) {
 
 
 // When Push notification come in
-Push.FCM().then(function(FCM) {
-  FCM.onMessage(function(payload) {
-    console.log('Message received. ', payload);
-    Push.create(payload.notification.title, {
-        body: payload.notification.body,
-        icon: payload.notification.body,
-        timeout: 4000,
-        onClick: function () {
-            window.focus();
-            this.close();
-        }
-    });
-  })
-});
+// Push.FCM().then(function(FCM) {
+//   FCM.onMessage(function(payload) {
+//     console.log('Message received. ', payload);
+//     Push.create(payload.notification.title, {
+//         body: payload.notification.body,
+//         icon: payload.notification.body,
+//         timeout: 4000,
+//         onClick: function () {
+//             window.focus();
+//             this.close();
+//         }
+//     });
+//   })
+// });
 
 
 // When Push notification come in
@@ -162,7 +162,8 @@ messaging.onMessage(function(payload) {
   Push.create(payload.notification.title, {
         body: payload.notification.body,
         icon: payload.notification.body,
-        timeout: 4000,
+        data: payload.notification.data,
+        timeout: payload.notification.timeout,
         onClick: function () {
             window.focus();
             this.close();
