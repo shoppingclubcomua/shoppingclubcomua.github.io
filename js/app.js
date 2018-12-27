@@ -7,7 +7,14 @@ var config = {
   databaseURL: "https://shoppingclubcomua-firebase.firebaseio.com",
   projectId: "shoppingclubcomua-firebase",
   storageBucket: "shoppingclubcomua-firebase.appspot.com",
-  messagingSenderId: "209475115553"
+  messagingSenderId: "209475115553",
+  serviceWorkerLocation: "./firebase-messaging-sw.js",
+  fallback: function(payload) {
+        // Code that executes on browsers with no notification support
+        // "payload" is an object containing the 
+        // title, body, tag, and icon of the notification 
+        alert(payload);
+    }
 };
 
 firebase.initializeApp(config);
@@ -137,6 +144,24 @@ Push.FCM().then(function(FCM) {
 }).catch(function(initError) {
    throw initError; 
 });
+
+
+// When Push notification come in
+Push.FCM().then(function(FCM) {
+  FCM.onMessage(function(payload) {
+    console.log('Message received. ', payload);
+    Push.create(payload.notification.title, {
+        body: payload.notification.body,
+        icon: payload.notification.body,
+        timeout: 4000,
+        onClick: function () {
+            window.focus();
+            this.close();
+        }
+    });
+  })
+});
+
 
 
 // ===========================
