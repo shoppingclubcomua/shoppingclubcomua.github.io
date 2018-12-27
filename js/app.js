@@ -10,7 +10,8 @@ var config = {
   messagingSenderId: "209475115553"
 };
 
-firebase.initializeApp(config);
+// firebase.initializeApp(config);
+Push.config({FCM: config});
 
 
 var database = firebase.database();
@@ -22,19 +23,6 @@ var messaging = firebase.messaging();
 messaging.usePublicVapidKey(
   "BIWiiYlS46z93E4gm9p80G32i98EwezKb-xzQBv2WgK4C2uj_xgyPA23T-8pw_Ar4L42d-Swegkgwb5A89w9KYs"
 );
-
-
-Push.config({FCM: config});
-
-Push.FCM().then(function(FCM) {
-    FCM.getToken().then(function(token) {
-        console.log("Initialized with token " + token);
-    }).catch(function(tokenError) {
-       throw tokenError; 
-    });
-}).catch(function(initError) {
-   throw initError; 
-});
 
 
 // When Push notification come in
@@ -127,6 +115,27 @@ messaging.onTokenRefresh(function() {
   }).catch(function(err) {
     console.log('Unable to retrieve refreshed token ', err);
   });
+});
+
+
+// plugin
+Push.FCM().then(function(FCM) {
+    FCM.getToken().then(function(currentToken) {
+      if (currentToken) {
+        sendTokenToServer(currentToken);
+      } else {
+        // Show permission request.
+        console.log('No Instance ID token available. Request permission to generate one.');
+        // Show permission UI.
+        updateUIForPushPermissionRequired();
+        setTokenSentToServer(false);
+      }
+    }).catch(function(err) {
+      console.log('An error occurred while retrieving token. ', err);
+      setTokenSentToServer(false);
+    });
+}).catch(function(initError) {
+   throw initError; 
 });
 
 
