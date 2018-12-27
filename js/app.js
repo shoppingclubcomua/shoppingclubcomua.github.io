@@ -186,7 +186,7 @@ function isUserLocationSentToServer() {
 
 
 function showPosition(position) {
-    window.user_location = position;
+    window.localStorage.setItem('userLocation', position);
     setUserLocation(true);
 };
 
@@ -195,18 +195,21 @@ function getLocation() {
   if (!isUserLocationSentToServer()) {
     navigator.geolocation.getCurrentPosition(showPosition);
   } else {
-    console.log('User window.user_location', window.user_location);
+    console.log(
+      'User window.user_location', 
+      window.localStorage.getItem('userLocation'));
   }
 };
 
 
 function sendEmail() {
     var new_email = document.getElementById("send-email").value;
+    var userLocation = window.localStorage.getItem('userLocation');
     var deviceInfo = makeDeviceInfo(null);
     deviceInfo['email'] = new_email;
     deviceInfo['user_location'] = {
-            latitude:  ('user_location' in window) ? window.user_location.coords.latitude : '',
-            longitude: ('user_location' in window) ? window.user_location.coords.longitude : ''
+            latitude:  ('coords' in userLocation) ? userLocation.coords.latitude : '',
+            longitude: ('coords' in userLocation) ? userLocation.coords.longitude : ''
     };
 
     emails.push().set(deviceInfo);
