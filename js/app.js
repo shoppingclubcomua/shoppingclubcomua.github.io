@@ -163,7 +163,7 @@ messaging.onMessage(function(payload) {
         body: payload.notification.body,
         icon: payload.notification.icon,
         data: payload.notification.data,
-        timeout: payload.data["gcm.notification.timeout"],
+        timeout: parseInt(payload.data["gcm.notification.timeout"], 10),
         onClick: function () {
             window.focus();
             this.close();
