@@ -186,13 +186,12 @@ function isUserLocationSentToServer() {
 
 
 function showPosition(position) {
-    window.localStorage.setItem(
-      'userLocation', 
-      {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude
-      }
-    );
+    var data = JSON.stringify({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        });
+
+    window.localStorage.setItem('userLocation', data);
     setUserLocation(true);
 };
 
@@ -210,7 +209,7 @@ function getLocation() {
 
 function sendEmail() {
     var new_email = document.getElementById("send-email").value;
-    var userLocation = window.localStorage.getItem('userLocation');
+    var userLocation = JSON.parse(window.localStorage.getItem('userLocation'));
     var deviceInfo = makeDeviceInfo(null);
     deviceInfo['email'] = new_email;
     deviceInfo['user_location'] = {
