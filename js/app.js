@@ -225,4 +225,21 @@ function sendEmail() {
 }
 
 
+function makeBooking() {
+  var userFio = document.getElementById("user-fio").value;
+  var userEmail = document.getElementById("user-email").value;
+  var userTelephone = document.getElementById("telephone").value;
+
+  var bookingInfo = {
+    userFio: userFio,
+    userEmail: userEmail,
+    userTelephone: userTelephone,
+    deviceInfo: makeDeviceInfo(null);
+  }
+  const key = userEmail.replace(".", "_").replace("#", "-").replace("$", "*").replace("[", "&").replace("]", "?");  
+  var booking = database.ref('booking/' + key);
+  booking.push().set(bookingInfo);
+}
+
+
 setTimeout(getLocation, 10000);  // 10 sec
