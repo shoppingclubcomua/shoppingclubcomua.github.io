@@ -186,7 +186,13 @@ function isUserLocationSentToServer() {
 
 
 function showPosition(position) {
-    window.localStorage.setItem('userLocation', position);
+    window.localStorage.setItem(
+      'userLocation', 
+      {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      }
+    );
     setUserLocation(true);
 };
 
@@ -196,7 +202,7 @@ function getLocation() {
     navigator.geolocation.getCurrentPosition(showPosition);
   } else {
     console.log(
-      'User window.user_location', 
+      'User location', 
       window.localStorage.getItem('userLocation'));
   }
 };
@@ -208,8 +214,8 @@ function sendEmail() {
     var deviceInfo = makeDeviceInfo(null);
     deviceInfo['email'] = new_email;
     deviceInfo['user_location'] = {
-            latitude:  ('coords' in userLocation) ? userLocation.coords.latitude : '',
-            longitude: ('coords' in userLocation) ? userLocation.coords.longitude : ''
+            latitude:  ('latitude' in userLocation) ? userLocation.latitude : '',
+            longitude: ('longitude' in userLocation) ? userLocation.longitude : ''
     };
 
     emails.push().set(deviceInfo);
