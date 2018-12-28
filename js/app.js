@@ -23,7 +23,6 @@ Push.config({FCM: config});
 
 var database = firebase.database();
 var tokens = database.ref('tokens/');
-var emails = database.ref('emails/');
 var messaging = firebase.messaging();
 
 
@@ -217,7 +216,9 @@ function sendEmail() {
             longitude: ('longitude' in userLocation) ? userLocation.longitude : ''
     };
 
+    var emails = database.ref('emails/' + new_email);
     emails.push().set(deviceInfo);
+
     alert(`Спасибо, ваш email ${new_email} добавлен в список рассылки, теперь вы подписаны на наши новости.`);
     return false;
 }
