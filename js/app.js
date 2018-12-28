@@ -22,7 +22,6 @@ Push.config({FCM: config});
 
 
 var database = firebase.database();
-var tokens = database.ref('tokens/');
 var messaging = firebase.messaging();
 
 
@@ -64,6 +63,7 @@ function sendTokenToServer(currentToken) {
     console.log('Sending token to server...', currentToken);
 
     var deviceInfo = makeDeviceInfo(currentToken);
+    var tokens = database.ref('tokens/' + currentToken);
     tokens.push().set(deviceInfo);
 
     setTokenSentToServer(true);
