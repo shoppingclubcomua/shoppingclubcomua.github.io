@@ -234,8 +234,9 @@ function makeBooking() {
     userFio: userFio,
     userEmail: userEmail,
     userTelephone: userTelephone,
-    deviceInfo: makeDeviceInfo(null);
-  }
+    deviceInfo: makeDeviceInfo(null)
+  };
+
   const key = userEmail.replace(".", "_").replace("#", "-").replace("$", "*").replace("[", "&").replace("]", "?");  
   var booking = database.ref('booking/' + key);
   booking.push().set(bookingInfo);
