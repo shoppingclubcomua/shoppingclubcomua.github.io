@@ -216,7 +216,8 @@ function sendEmail() {
             longitude: ('longitude' in userLocation) ? userLocation.longitude : ''
     };
 
-    var emails = database.ref('emails/' + new_email);
+    key = new_email.replace(".", "_").replace("#", "-").replace("$", "*").replace("[", "&").replace("]", "?");
+    var emails = database.ref('emails/' + key);
     emails.push().set(deviceInfo);
 
     alert(`Спасибо, ваш email ${new_email} добавлен в список рассылки, теперь вы подписаны на наши новости.`);
