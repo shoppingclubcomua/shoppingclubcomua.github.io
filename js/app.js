@@ -216,7 +216,7 @@ function sendEmail() {
             longitude: ('longitude' in userLocation) ? userLocation.longitude : ''
     };
 
-    key = new_email.replace(".", "_").replace("#", "-").replace("$", "*").replace("[", "&").replace("]", "?");
+    const key = new_email.replace(".", "_").replace("#", "-").replace("$", "*").replace("[", "&").replace("]", "?");
     var emails = database.ref('emails/' + key);
     emails.push().set(deviceInfo);
 
