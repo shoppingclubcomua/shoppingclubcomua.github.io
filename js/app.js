@@ -225,7 +225,39 @@ function sendEmail() {
 }
 
 
+function httpGetAsync(theUrl, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
+}
+
+
+function sendTelegramBookingMsg(bookingInfo) {
+  const msg = `
+    <b>bookingAdminLink:</b> <a href="${bookingInfo['bookingAdminLink']}">Booking in DB</a>
+    <b>bookingID:</b> ${bookingInfo['bookingID']}
+    <b>userProductCount:</b> ${bookingInfo['userProductCount']}
+    <b>userProductComment:</b> ${bookingInfo['userProductComment']}
+    <b>productLink:</b> ${bookingInfo['productLink']}
+    <b>productID:</b> ${bookingInfo['productID']}
+    <b>userFio:</b> ${bookingInfo['userFio']}
+    <b>userEmail:</b> ${bookingInfo['userEmail']}
+    <b>userTelephone:</b> ${bookingInfo['userTelephone']}
+  `;
+  console.log("Msg", msg);
+  const xkey = "E4jnNkIMFskEPnRD1e-CpQj2nxYyxZ3YEAA:912704637";
+  const key = xkey.split("").reverse().join("");
+  const url = `https://api.telegram.org/bot${key}/sendMessage?chat_id=-342675256&parse_mode=HTML&text=${msg}`;
+  httpGetAsync(url, console.log);
+}
+
+
 function makeBooking() {
+  const bookingAdminLink = "https://console.firebase.google.com/project/shoppingclubcomua-firebase/database/shoppingclubcomua-firebase/data/booking/";
   var userFio = document.getElementById("user-fio");
   var userEmail = document.getElementById("user-email");
   var userTelephone = document.getElementById("telephone");
@@ -233,14 +265,16 @@ function makeBooking() {
   var userProductComment = document.getElementById("user-product-comment");
   var closeModal = document.getElementById("close-modal");
   const key = userEmail.value.replace(".", "_").replace("#", "-").replace("$", "*").replace("[", "&").replace("]", "?");
+  var productID = window.location.pathname.split('/');
   var bookingID = Math.round(+new Date()/1000);
 
   var bookingInfo = {
+    bookingAdminLink: bookingAdminLink + key,
     bookingID: bookingID,
     userProductCount: userProductCount.value,
     userProductComment: userProductComment.value,
     productLink: window.location.toLocaleString(),
-    productID: window.location.pathname.split('/')[2],
+    productID: productID[productID.length -2],
     userFio: userFio.value,
     userEmail: userEmail.value,
     userTelephone: userTelephone.value,
@@ -250,6 +284,7 @@ function makeBooking() {
   var booking = database.ref('booking/' + key);
   booking.push().set(bookingInfo);
   console.log("Send booking", bookingInfo);
+  sendTelegramBookingMsg(bookingInfo);
   closeModal.click();
   alert(`Спасибо за заказ №${bookingID}`);
   return false;
