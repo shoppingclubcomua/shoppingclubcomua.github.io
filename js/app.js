@@ -226,20 +226,32 @@ function sendEmail() {
 
 
 function makeBooking() {
-  var userFio = document.getElementById("user-fio").value;
-  var userEmail = document.getElementById("user-email").value;
-  var userTelephone = document.getElementById("telephone").value;
+  var userFio = document.getElementById("user-fio");
+  var userEmail = document.getElementById("user-email");
+  var userTelephone = document.getElementById("telephone");
+  var userProductCount = document.getElementById("user-product-count");
+  var userProductComment = document.getElementById("user-product-comment");
+  var closeModal = document.getElementById("close-modal");
+  const key = userEmail.value.replace(".", "_").replace("#", "-").replace("$", "*").replace("[", "&").replace("]", "?");
+  var bookingID = Math.round(+new Date()/1000);
 
   var bookingInfo = {
-    userFio: userFio,
-    userEmail: userEmail,
-    userTelephone: userTelephone,
+    bookingID: bookingID,
+    userProductCount: userProductCount.value,
+    userProductComment: userProductComment.value,
+    product: window.location.toLocaleString(),
+    userFio: userFio.value,
+    userEmail: userEmail.value,
+    userTelephone: userTelephone.value,
     deviceInfo: makeDeviceInfo(null)
   };
 
-  const key = userEmail.replace(".", "_").replace("#", "-").replace("$", "*").replace("[", "&").replace("]", "?");  
   var booking = database.ref('booking/' + key);
   booking.push().set(bookingInfo);
+  console.log("Send booking", bookingInfo);
+  closeModal.click();
+  alert(`Спасибо за заказ №${bookingID}`);
+  return false;
 }
 
 
