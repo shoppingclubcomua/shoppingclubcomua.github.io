@@ -89,36 +89,44 @@ function updateUIForPushPermissionRequired() {
 
 // Get Instance ID token. Initially this makes a network call, once retrieved
 // subsequent calls to getToken will return from cache.
-messaging.getToken().then(function(currentToken) {
-  if (currentToken) {
-    sendTokenToServer(currentToken);
-  } else {
-    // Show permission request.
-    console.log('No Instance ID token available. Request permission to generate one.');
-    // Show permission UI.
-    updateUIForPushPermissionRequired();
+if (messaging) {
+  messaging.getToken().then(function(currentToken) {
+    if (currentToken) {
+      sendTokenToServer(currentToken);
+    } else {
+      // Show permission request.
+      console.log('No Instance ID token available. Request permission to generate one.');
+      // Show permission UI.
+      updateUIForPushPermissionRequired();
+      setTokenSentToServer(false);
+    }
+  }).catch(function(err) {
+    console.log('An error occurred while retrieving token. ', err);
     setTokenSentToServer(false);
-  }
-}).catch(function(err) {
-  console.log('An error occurred while retrieving token. ', err);
-  setTokenSentToServer(false);
-});
+  });
+} else {
+  console.log("Error messaging", messaging)
+}
 
 
 // Callback fired if Instance ID token is updated.
-messaging.onTokenRefresh(function() {
-  messaging.getToken().then(function(refreshedToken) {
-    console.log('Token refreshed.');
-    // Indicate that the new Instance ID token has not yet been sent to the
-    // app server.
-    setTokenSentToServer(false);
-    // Send Instance ID token to app server.
-    sendTokenToServer(refreshedToken);
-    // ...
-  }).catch(function(err) {
-    console.log('Unable to retrieve refreshed token ', err);
+if (messaging) {
+  messaging.onTokenRefresh(function() {
+    messaging.getToken().then(function(refreshedToken) {
+      console.log('Token refreshed.');
+      // Indicate that the new Instance ID token has not yet been sent to the
+      // app server.
+      setTokenSentToServer(false);
+      // Send Instance ID token to app server.
+      sendTokenToServer(refreshedToken);
+      // ...
+    }).catch(function(err) {
+      console.log('Unable to retrieve refreshed token ', err);
+    });
   });
-});
+} else {
+  console.log("Error messaging", messaging)
+}
 
 
 // plugin
@@ -160,21 +168,24 @@ Push.FCM().then(function(FCM) {
 
 
 // When Push notification come in
-messaging.onMessage(function(payload) {
-  console.log('Message received. ', payload);
-  Push.create(payload.notification.title, {
-        body: payload.notification.body,
-        icon: payload.notification.icon,
-        timeout: 240000,
-        requireInteraction: true,
-        vibrate: true,
-        onClick: function () {
-            window.focus();
-            this.close();
-        }
-    });
-});
-
+if (messaging) {
+  messaging.onMessage(function(payload) {
+    console.log('Message received. ', payload);
+    Push.create(payload.notification.title, {
+          body: payload.notification.body,
+          icon: payload.notification.icon,
+          timeout: 240000,
+          requireInteraction: true,
+          vibrate: true,
+          onClick: function () {
+              window.focus();
+              this.close();
+          }
+      });
+  });
+} else {
+  console.log("Error messaging", messaging)
+}
 
 // ===========================
 
