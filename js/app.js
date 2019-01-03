@@ -146,7 +146,7 @@ Push.FCM().then(function(FCM) {
       setTokenSentToServer(false);
     });
 }).catch(function(initError) {
-   throw initError; 
+   console.log('An error occurred. ', initError);
 });
 
 
