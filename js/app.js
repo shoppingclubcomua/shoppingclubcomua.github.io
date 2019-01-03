@@ -25,14 +25,12 @@ var database = firebase.database();
 
 try {
   var messaging = firebase.messaging();
+  messaging.usePublicVapidKey(
+    "BIWiiYlS46z93E4gm9p80G32i98EwezKb-xzQBv2WgK4C2uj_xgyPA23T-8pw_Ar4L42d-Swegkgwb5A89w9KYs"
+  );
 } catch (err) {
   var messaging
 }
-
-
-messaging.usePublicVapidKey(
-  "BIWiiYlS46z93E4gm9p80G32i98EwezKb-xzQBv2WgK4C2uj_xgyPA23T-8pw_Ar4L42d-Swegkgwb5A89w9KYs"
-);
 
 
 function makeDeviceInfo(token) {
