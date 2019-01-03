@@ -22,7 +22,12 @@ Push.config({FCM: config});
 
 
 var database = firebase.database();
-var messaging = firebase.messaging();
+
+try {
+  var messaging = firebase.messaging();
+} catch (err) {
+  var messaging
+}
 
 
 messaging.usePublicVapidKey(
