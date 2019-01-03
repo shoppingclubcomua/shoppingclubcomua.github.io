@@ -236,6 +236,9 @@ function sendEmail() {
     emails.push().set(deviceInfo);
 
     alert(`Спасибо, ваш email ${new_email} добавлен в список рассылки, теперь вы подписаны на наши новости.`);
+
+    fbq('track', 'Subscribe');
+
     return false;
 }
 
@@ -302,6 +305,9 @@ function makeBooking() {
   sendTelegramBookingMsg(bookingInfo);
   closeModal.click();
   alert(`Спасибо за заказ №${bookingID}`);
+
+  fbq('track', 'Purchase');
+
   return false;
 }
 
