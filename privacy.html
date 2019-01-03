@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="index" lang="en">
+<html class="index" lang="ru">
 
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -20,14 +20,6 @@
     <!-- SEO -->
     <meta content="Shopping Club интернет-магазин сумок, рюкзаков и аксессуаров" name="robots">
     <meta content="Услови использования и политика конфиденциальности" name="keywords">
-
-    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-database.js"></script>  
-    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-messaging.js"></script>
-
-    <script src="js/client.min.js"></script>
-    <script src="js/push.min.js"></script>
-    <script src="js/push.fcm.min.js"></script>
     <link href="css/main.css" rel="stylesheet">
 </head>
 
@@ -210,43 +202,41 @@
             </div>
         </footer>
     </div>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45810421-4"></script>
     <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-M5XHPR8');
-    </script>
-    <noscript>
-        <iframe height=0 src="https://www.googletagmanager.com/ns.html?id=GTM-M5XHPR8" style="display:none;visibility:hidden" width=0>
-        </iframe>
-    </noscript>
-    <script type="text/javascript" id="">
-        ! function(b, e, f, g, a, c, d) {
-            b.fbq || (a = b.fbq = function() {
-                a.callMethod ? a.callMethod.apply(a, arguments) : a.queue.push(arguments)
-            }, b._fbq || (b._fbq = a), a.push = a, a.loaded = !0, a.version = "2.0", a.queue = [], c = e.createElement(f), c.async = !0, c.src = g, d = e.getElementsByTagName(f)[0], d.parentNode.insertBefore(c, d))
-        }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
-        fbq("init", "723714854502216");
-        fbq("track", "PageView");
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-45810421-4');
     </script>
 
-    <noscript>
-        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=723714854502216&amp;ev=PageView&amp;noscript=1">
-    </noscript>
-    <iframe style="display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;" name="_hjRemoteVarsFrame" title="_hjRemoteVarsFrame" id="_hjRemoteVarsFrame" src="Bedtime_files/rcj-da10bd4908deb9e19dfde013ec3fe4ff.html">
-    </iframe>
-    <div id="ads">
-    </div>
+    <!-- Facebook Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '434950273709763');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=434950273709763&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-database.js"></script>  
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase-messaging.js"></script>
+    <script src="js/client.min.js"></script>
+    <script src="js/push.min.js"></script>
+    <script src="js/push.fcm.min.js"></script>
+    <script src="js/app.js"></script>
 </body>
-
 </html>
